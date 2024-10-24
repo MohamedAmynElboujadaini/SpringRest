@@ -3,22 +3,35 @@ services:
   backend:
     build:
       context: .
-      dockerfile: Dockerfile  # Make sure the Dockerfile is in the Spring Boot project root
+      dockerfile: Dockerfile  # Dockerfile for Spring Boot app
     ports:
       - "8080:8080"
     networks:
       - app-network
 
+    depends_on:
+      - mysql
+
   frontend:
     build:
       context: .
-      dockerfile: src/main/webapp/reactjs/Dockerfile  # Point to the Dockerfile for the React app
+      dockerfile: src/main/webapp/reactjs/Dockerfile  # Dockerfile for React app
     ports:
-      - "3000:80"  # Maps port 3000 to the frontend running on port 80 inside the container
+      - "3000:80"
     networks:
       - app-network
     depends_on:
       - backend
+
+  mysql:
+    image: mysql@sha256:fd8d1b4e287c49e1e35eb5a103f337111947662130eb8a3e6c3e823813f47f7d
+    environment:
+      MYSQL_ROOT_PASSWORD : 123456789
+      MYSQL_DATABASE: SpringRest
+    ports:
+      - "3307:3306"
+    networks:
+      - app-network
 
 networks:
   app-network:
