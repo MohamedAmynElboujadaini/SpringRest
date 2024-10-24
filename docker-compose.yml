@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Make sure the Dockerfile is in the Spring Boot project root
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: src/main/webapp/reactjs/Dockerfile  # Point to the Dockerfile for the React app
+    ports:
+      - "3000:80"  # Maps port 3000 to the frontend running on port 80 inside the container
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+networks:
+  app-network:
+    driver: bridge
