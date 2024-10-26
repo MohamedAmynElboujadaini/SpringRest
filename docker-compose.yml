@@ -14,8 +14,8 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: src/main/webapp/reactjs/Dockerfile  # Dockerfile for React app
+      context: ./src/main/webapp/reactjs
+      dockerfile: Dockerfile  # Dockerfile for React app
     ports:
       - "3000:80"
     networks:

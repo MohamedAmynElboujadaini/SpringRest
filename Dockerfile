@@ -11,4 +11,4 @@ COPY target/SpringDataRest-0.0.1-SNAPSHOT.jar /app/SpringDataRest-0.0.1-SNAPSHOT
 EXPOSE 8080
 
 # Run the JAR file
-ENTRYPOINT ["java", "-jar", "SpringDataRest-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/SpringDataRest-0.0.1-SNAPSHOT.jar"]
